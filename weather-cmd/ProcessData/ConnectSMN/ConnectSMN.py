@@ -37,16 +37,15 @@ class ConnectSMN(object):
 
         response = requests.get(self.__url, headers=header, verify=False)
         resultado = b''
-
+        # imprimir el estado de la respuesta
+        
         resultado = response.content
-
-        return BytesIO(resultado) 
+        return BytesIO(resultado)
         
 if __name__ == "__main__":
     
     prueba = ConnectSMN("https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre")
-    
     content = prueba.download_file()
-    print(content)
+    print(str( content)   )
     
     
