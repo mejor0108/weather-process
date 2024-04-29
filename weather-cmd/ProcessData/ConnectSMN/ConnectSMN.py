@@ -38,7 +38,7 @@ class ConnectSMN(object):
         response = requests.get(self.__url, headers=header, verify=False)
         resultado = b''
         # imprimir el estado de la respuesta
-        
+       
         resultado = response.content
         return BytesIO(resultado)
         

@@ -24,7 +24,7 @@ class ZipToData:
             filename_txt = zip_ref.namelist()[0]
             file_zip_txt = zip_ref.open(filename_txt)
             resultado_txt = file_zip_txt.read().decode('ANSI')
-        
+
         return resultado_txt
     
 if __name__ == "__main__":
