@@ -2,6 +2,8 @@ import requests
 import warnings
 from typing import BinaryIO
 from io import BytesIO
+from dotenv import load_dotenv
+import os
 
 class ConnectSMN(object):
     __url = None
@@ -43,8 +45,8 @@ class ConnectSMN(object):
         return BytesIO(resultado)
         
 if __name__ == "__main__":
-    
-    prueba = ConnectSMN("https://ssl.smn.gob.ar/dpd/zipopendata.php?dato=tiepre")
+    load_dotenv()
+    prueba = ConnectSMN(os.getenv('URL_SMN'))
     content = prueba.download_file()
     print(str( content)   )
     
