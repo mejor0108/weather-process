@@ -20,108 +20,108 @@ class Weather(Document):
     # viento_direccion = None            # str
     # presion_superfice = None           # float > 0 
     
-    _fecha_hora          = DateField(required=True)
-    _estacion            = StringField(required=True)
-    _temperatura         = FloatField(required=True)
-    _estado_nuboso       = StringField(required=True)
-    _visibilidad         = FloatField(min_value=0, required=True)
-    _sensacion_termica   = FloatField(required=True)
-    _humedad_relativa    = FloatField(min_value=0, required=True)
-    _viento_intensidad   = FloatField(min_value=0, required=True)
-    _viento_direccion    = StringField(required=True)
-    _presion_superfice   = FloatField(min_value=0, required=True)
+    fecha_hora          = DateField(required=True)
+    estacion            = StringField(required=True)
+    temperatura         = FloatField(required=True)
+    estado_nuboso       = StringField(required=True)
+    visibilidad         = FloatField(min_value=0, required=True)
+    sensacion_termica   = FloatField(required=True)
+    humedad_relativa    = FloatField(min_value=0, required=True)
+    viento_intensidad   = FloatField(min_value=0, required=True)
+    viento_direccion    = StringField(required=True)
+    presion_superfice   = FloatField(min_value=0, required=True)
     
     def __init__(self, *args ,**kwargs):
         # insertar los parametro en su correspondiente atributo
         super(Weather, self).__init__(*args, **kwargs)
        
-    @property
-    def fecha(self):
-        return self._fecha_hora
+    # @property
+    # def fecha(self):
+    #     return self._fecha_hora
 
-    @fecha.setter
-    def fecha(self, value):
-        self._fecha_hora = value
+    # @fecha.setter
+    # def fecha(self, value):
+    #     self._fecha_hora = value
 
-    @property
-    def estacion(self):
-        return self._estacion
+    # @property
+    # def estacion(self):
+    #     return self._estacion
 
-    @estacion.setter
-    def estacion(self, value):
-        self._estacion = value
+    # @estacion.setter
+    # def estacion(self, value):
+    #     self._estacion = value
 
-    @property
-    def hora(self):
-        return self._hora
+    # @property
+    # def hora(self):
+    #     return self._hora
 
-    @hora.setter
-    def hora(self, value):
-        self._hora = value
+    # @hora.setter
+    # def hora(self, value):
+    #     self._hora = value
 
-    @property
-    def temperatura(self):
-        return self.temperatura
+    # @property
+    # def temperatura(self):
+    #     return self.temperatura
 
-    @temperatura.setter
-    def temperatura(self, value):
-        self._temperatura = value
+    # @temperatura.setter
+    # def temperatura(self, value):
+    #     self._temperatura = value
 
-    @property
-    def estado_nuboso(self):
-        return self._estado_nuboso
+    # @property
+    # def estado_nuboso(self):
+    #     return self._estado_nuboso
 
-    @estado_nuboso.setter
-    def estado_nuboso(self, value):
-        self._estado_nuboso = value
+    # @estado_nuboso.setter
+    # def estado_nuboso(self, value):
+    #     self._estado_nuboso = value
 
-    @property
-    def visibilidad(self):
-        return self._visibilidad
+    # @property
+    # def visibilidad(self):
+    #     return self._visibilidad
 
-    @visibilidad.setter
-    def visibilidad(self, value):
-        self._visibilidad = value
+    # @visibilidad.setter
+    # def visibilidad(self, value):
+    #     self._visibilidad = value
 
-    @property
-    def sensacion_termica(self):
-        return self._sensacion_termica
+    # @property
+    # def sensacion_termica(self):
+    #     return self._sensacion_termica
 
-    @sensacion_termica.setter
-    def sensacion_termica(self, value):
-        self._sensacion_termica = value
+    # @sensacion_termica.setter
+    # def sensacion_termica(self, value):
+    #     self._sensacion_termica = value
 
-    @property
-    def humedad_relativa(self):
-        return self._humedad_relativa
+    # @property
+    # def humedad_relativa(self):
+    #     return self._humedad_relativa
 
-    @humedad_relativa.setter
-    def humedad_relativa(self, value):
-        self._humedad_relativa = value
+    # @humedad_relativa.setter
+    # def humedad_relativa(self, value):
+    #     self._humedad_relativa = value
 
-    @property
-    def viento_intensidad(self):
-        return self._viento_intensidad
+    # @property
+    # def viento_intensidad(self):
+    #     return self._viento_intensidad
 
-    @viento_intensidad.setter
-    def viento_intensidad(self, value):
-        self._viento_intensidad = value
+    # @viento_intensidad.setter
+    # def viento_intensidad(self, value):
+    #     self._viento_intensidad = value
 
-    @property
-    def viento_direccion(self):
-        return self._viento_direccion
+    # @property
+    # def viento_direccion(self):
+    #     return self._viento_direccion
 
-    @viento_direccion.setter
-    def viento_direccion(self, value):
-        self._viento_direccion = value
+    # @viento_direccion.setter
+    # def viento_direccion(self, value):
+    #     self._viento_direccion = value
 
-    @property
-    def presion_superfice(self):
-        return self._presion_superfice
+    # @property
+    # def presion_superfice(self):
+    #     return self._presion_superfice
 
-    @presion_superfice.setter
-    def presion_superfice(self, value):
-        self._presion_superfice = value
+    # @presion_superfice.setter
+    # def presion_superfice(self, value):
+    #     self._presion_superfice = value
         
     
     
@@ -160,7 +160,7 @@ class Weather(Document):
     
     meta = {
         'db_alias': 'core',
-        'collection': 'weather'
+        'collection': "documents"
     }
     
     
@@ -168,7 +168,7 @@ class Weather(Document):
 if __name__ == '__main__':
     load_dotenv()
     
-    connect(alias='core', host=os.getenv('MONGODB'))
+    connect(os.getenv('MONGODB_DATABASE'),alias='core', host=os.getenv('MONGODB_SERVER'))
     
     weather = Weather( 
         fecha_hora='2021-10-01',
