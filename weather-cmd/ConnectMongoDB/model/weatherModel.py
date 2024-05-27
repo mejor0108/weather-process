@@ -67,8 +67,24 @@ class Weather(Document):
         # insertar los parametro en su correspondiente atributo
         super(Weather, self).__init__(*args, **kwargs)
        
-    
-    
+    # TODO : Implementar el metodo save, corregir el update del datos_hora
+    def save(self, *args, **kwargs):
+        """
+        Saves the WeatherModel object to the database.
+        
+        This method overrides the save method of the Document class.
+        """
+        
+        # Si el documente ya existe, se actualiza los datos de la hora
+        # Si no existe, se crea un nuevo documento
+        if Weather.objects(fecha=self.fecha, estacion=self.estacion):
+            # quiero agregar el dato hora en la lista de datos_hora
+            Weather.objects(fecha=self.fecha, estacion=self.estacion).update(push__datos_hora=self.datos_hora[0])
+             
+        else:
+            # Si no existe, se crea un nuevo documento
+            super(Weather, self).save(*args, **kwargs)
+            
 
             
     def __str__(self):
@@ -90,20 +106,16 @@ class Weather(Document):
         """
         return (
             'estación :' + self.estacion + '\n' +
-            'fecha :' + str( self.fecha_hora )+ '\n' +
-            'temperatura :' + str(self.temperatura) + '\n' +
-            'estado nuboso :' + str(self.estado_nuboso) + '\n' +
-            'visibilidad :' + str(self.visibilidad) + '\n' +
-            'sensación térmica :' + str( self.sensacion_termica) + '\n' +
-            'humedad relativa :' + str(self.humedad_relativa) + '\n' +
-            'viento intensidad :' + str(self.viento_intensidad) + '\n' +
-            'viento dirección :' + str(self.viento_direccion) + '\n' +
-            'presión superficie :' + str(self.presion_superfice)  + '\n'
+            'fecha :' + str( self.fecha )+ '\n' +
+            'datos hora :' + str(self.datos_hora) + '\n'
                 )
     
     meta = {
         'db_alias': 'core',
-        'collection': "documents"
+        'collection': "documents",
+         'indexes': [
+            {'fields': ('fecha', 'estacion'), 'unique': True}
+        ]
     }
     
     
